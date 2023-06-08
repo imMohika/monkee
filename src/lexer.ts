@@ -27,7 +27,12 @@ export class Lexer {
     let token: Token;
     switch (this.ch) {
       case "=":
-        token = newToken("ASSIGN", this.ch);
+        if (this.peek() === "=") {
+          token = newToken("EQUALS", "==");
+          this.readNextChar();
+        } else {
+          token = newToken("ASSIGN", this.ch);
+        }
         break;
 
       case ";":
@@ -48,6 +53,30 @@ export class Lexer {
 
       case "+":
         token = newToken("PLUS", this.ch);
+        break;
+
+      case "!":
+        if (this.peek() === "=") {
+          token = newToken("NOT_EQUAL", "!=");
+          this.readNextChar();
+        } else {
+          token = newToken("BANG", this.ch);
+        }
+        break;
+      case "/":
+        token = newToken("SLASH", this.ch);
+        break;
+      case "*":
+        token = newToken("STAR", this.ch);
+        break;
+      case "<":
+        token = newToken("LESS_THAN", this.ch);
+        break;
+      case ">":
+        token = newToken("GREATER_THAN", this.ch);
+        break;
+      case "-":
+        token = newToken("MINUS", this.ch);
         break;
 
       case "{":
@@ -75,6 +104,14 @@ export class Lexer {
 
     this.readNextChar();
     return token;
+  }
+
+  peek(length = 1) {
+    if (this.readPosition + length > this.input.length) {
+      return "\0"
+    }
+
+    return this.input.slice(this.readPosition, this.readPosition + length);
   }
 
   eatWhileTrue(fn: (ch: string) => boolean): string {

@@ -33,6 +33,10 @@ test("nextToken (extended)", () => {
     x + y;
   };
   let result = add(five, ten);
+  
+  !-/*<>;
+  if else true false return;
+  == !=;
   `;
 
 
@@ -75,6 +79,25 @@ test("nextToken (extended)", () => {
     newToken("COMMA", ","),
     newToken("IDENT", "ten"),
     newToken("RIGHT_PAREN", ")"),
+    newToken("SEMICOLON", ";"),
+
+    newToken("BANG", "!"),
+    newToken("MINUS", "-"),
+    newToken("SLASH", "/"),
+    newToken("STAR", "*"),
+    newToken("LESS_THAN", "<"),
+    newToken("GREATER_THAN", ">"),
+    newToken("SEMICOLON", ";"),
+
+    newToken("IF", "if"),
+    newToken("ELSE", "else"),
+    newToken("TRUE", "true"),
+    newToken("FALSE", "false"),
+    newToken("RETURN", "return"),
+    newToken("SEMICOLON", ";"),
+
+    newToken("EQUALS", "=="),
+    newToken("NOT_EQUAL", "!="),
     newToken("SEMICOLON", ";"),
 
     newToken("EOF", "\0"),

@@ -9,6 +9,16 @@ export const TokenType = {
   // Operatos
   ASSIGN: "=",
   PLUS: "+",
+  MINUS: "-",
+  BANG: "!",
+  STAR: "*",
+  SLASH: "/",
+
+  LESS_THAN: "<",
+  GREATER_THAN: ">",
+
+  EQUALS: "==",
+  NOT_EQUAL: "!=",
 
   // Delimiters
   COMMA: ",",
@@ -24,7 +34,12 @@ export const TokenType = {
 
   // Keywords
   FUNCTION: "FUNCTION",
-  LET: "LET"
+  LET: "LET",
+  IF: "IF",
+  ELSE: "ELSE",
+  TRUE: "TRUE",
+  FALSE: "FALSE",
+  RETURN: "RETURN",
 } as const;
 
 
@@ -40,7 +55,12 @@ export const newToken = (type: TokenType, literal: TokenLiteral): Token => ({ ty
 
 const ReservedWords = {
   "fn": newToken("FUNCTION", "fn"),
-  "let": newToken("LET", "let")
+  "let": newToken("LET", "let"),
+  "if": newToken("IF", "if"),
+  "else": newToken("ELSE", "else"),
+  "true": newToken("TRUE", "true"),
+  "false": newToken("FALSE", "false"),
+  "return": newToken("RETURN", "return"),
 } as const;
 
 type ReservedWord = keyof typeof ReservedWords;
